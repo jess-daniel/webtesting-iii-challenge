@@ -16,16 +16,13 @@ test("toggleClosed toggles between open and closed", () => {
   expect(toggleClosedMock).toHaveBeenCalled();
 });
 
-// test("toggleLocked toggles between locked and unlocked", async () => {
-//   const toggleClosedMock = jest.fn();
-//   const toggleLockedMock = jest.fn();
-//   const { getByText } = render(
-//     <Controls toggleLocked={toggleLockedMock} toggleClosed={toggleClosedMock} />
-//   );
-//   const closeButton = getByText(/close gate/i);
-//   await fireEvent.click(closeButton);
-//   expect(toggleClosedMock).toHaveBeenCalled();
-//   const lockedButton = getByText(/lock gate/i);
-//   fireEvent.click(lockedButton);
-//   expect(toggleLockedMock).toHaveBeenCalled();
-// });
+test("toggleLocked toggles between locked and unlocked", () => {
+  const toggleLockedMock = jest.fn();
+  const { getByText } = render(
+    <Controls locked={false} closed={true} toggleLocked={toggleLockedMock} />
+  );
+  const lockedButton = getByText(/lock gate/i);
+  fireEvent.click(lockedButton);
+  expect(getByText(/lock gate/i)).toBeTruthy();
+  expect(toggleLockedMock).toHaveBeenCalled();
+});

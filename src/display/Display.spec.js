@@ -17,3 +17,8 @@ test("Gate cganges to close", () => {
   const { getByText } = render(<Display />);
   getByText(/open/i);
 });
+
+test("if false displays unlocked", () => {
+  const { getByText } = render(<Display locked={false} />);
+  getByText(/locked/i);
+});
